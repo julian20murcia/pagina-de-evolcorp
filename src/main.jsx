@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { createRoot } from 'react-dom/client';
 import * as THREE from 'three';
 import {
@@ -10,7 +11,6 @@ import {
   Fingerprint,
   LayoutDashboard,
   Menu,
-  MessageCircle,
   MonitorSmartphone,
   PenTool,
   Puzzle,
@@ -834,22 +834,56 @@ function Portfolio() {
     [activeId],
   );
 
+  useEffect(() => {
+    const rotationTimer = window.setTimeout(() => {
+      setActiveId(currentId => {
+        const currentIndex = portfolioProjects.findIndex(
+          project => project.id === currentId,
+        );
+
+        const nextIndex =
+          currentIndex >= portfolioProjects.length - 1
+            ? 0
+            : currentIndex + 1;
+
+        return portfolioProjects[nextIndex].id;
+      });
+    }, 5000);
+
+    return () => window.clearTimeout(rotationTimer);
+  }, [activeId]);
+
+  const handleProjectClick = projectId => {
+    setActiveId(projectId);
+  };
+
   return (
-    <section id="proyectos" className="section full-bleed soft-panel portfolio-section">
+    <section
+      id="proyectos"
+      className="section full-bleed soft-panel portfolio-section"
+    >
       <div className="section-head" data-reveal>
-        <span className="tag green">PORTAFOLIO REAL</span>
         <h2>Proyectos que partieron de problemas concretos.</h2>
-        <p>Selecciona una organización para ver el enfoque de la solución que construimos.</p>
+        <p>
+          Selecciona una organización para ver el enfoque de la solución que
+          construimos.
+        </p>
       </div>
 
       <div className="portfolio-layout" data-reveal>
-        <div className="portfolio-logo-grid" role="tablist" aria-label="Proyectos EvolCorp">
+        <div
+          className="portfolio-logo-grid"
+          role="tablist"
+          aria-label="Proyectos EvolCorp"
+        >
           {portfolioProjects.map(project => (
             <button
-              className={`portfolio-logo-card ${project.id === activeProject.id ? 'is-active' : ''}`}
+              className={`portfolio-logo-card ${
+                project.id === activeProject.id ? 'is-active' : ''
+              }`}
               key={project.id}
               type="button"
-              onClick={() => setActiveId(project.id)}
+              onClick={() => handleProjectClick(project.id)}
               aria-pressed={project.id === activeProject.id}
             >
               <span className="portfolio-logo-frame">
@@ -861,7 +895,10 @@ function Portfolio() {
           ))}
         </div>
 
-        <aside className="portfolio-detail">
+        <aside
+          className="portfolio-detail portfolio-detail-transition"
+          key={activeProject.id}
+        >
           <img src={activeProject.logo} alt="" aria-hidden="true" />
           <span className="tag cyan">{activeProject.category}</span>
           <h3>{activeProject.name}</h3>
@@ -1002,7 +1039,7 @@ function WhatsAppFloat() {
       rel="noreferrer"
       aria-label="Escribir por WhatsApp"
     >
-      <MessageCircle size={24} />
+      <FaWhatsapp size={30} />
     </a>
   );
 }
