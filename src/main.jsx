@@ -33,6 +33,9 @@ import person2 from './assets/PERSONAJE 2.png';
 import person3 from './assets/PERSONAJE 3.png';
 import person4 from './assets/PERSONAJE 4.png';
 import modulo2 from './assets/MODULO 2.png';
+import deyvidPhoto from './assets/equipo/Deyvid.png';
+import julianPhoto from './assets/equipo/Julian.png';
+import bradleyPhoto from './assets/equipo/Brad.png';
 
 import agrolecheLogo from './assets/clientes/Agroleche.png';
 import cdaLogo from './assets/clientes/CDA.png';
@@ -652,6 +655,7 @@ function Header() {
   const links = [
     ['Servicios', '#servicios'],
     ['Proyectos', '#proyectos'],
+    ['Nosotros', '#nosotros'],
     ['Proceso', '#proceso'],
     ['Casos', '#casos'],
     ['Contacto', '#contacto'],
@@ -1015,6 +1019,96 @@ function Benefits() {
   );
 }
 
+
+function Team() {
+  const teamMembers = [
+    {
+      order: '02',
+      name: 'Julian Santiago Nieto Murcia',
+      label: 'DIRECCIÓN DE PROYECTOS',
+      role: 'Líder de Proyectos y Desarrollo Full Stack',
+      description:
+        'Dirige iniciativas digitales desde el levantamiento de necesidades hasta la entrega. Integra desarrollo front-end y back-end, mejora de producto y acompañamiento a clientes.',
+      photo: julianPhoto,
+      tags: ['Proyecto', 'Front-end', 'Back-end'],
+    },
+    {
+      order: '01',
+      name: 'Deyvid Adrian Jimenez Salazar',
+      label: 'ESTRATEGIA Y NEGOCIO',
+      role: 'Fundador y Director de Estrategia & Desarrollo',
+      description:
+        'Lidera la visión de EvolCorp, la relación comercial y el inicio de nuevos proyectos. Conecta necesidades de negocio con soluciones digitales y participa directamente en su desarrollo.',
+      photo: deyvidPhoto,
+      tags: ['Estrategia', 'Clientes', 'Desarrollo'],
+      featured: true,
+    },
+    {
+      order: '03',
+      name: 'Bradley Jeffrey Ballen Jola',
+      label: 'INGENIERÍA DE PRODUCTO',
+      role: 'Líder de Ingeniería Full Stack',
+      description:
+        'Construye soluciones digitales de punta a punta, conectando interfaces, lógica de negocio, datos y servicios para que cada producto opere de manera sólida y eficiente.',
+      photo: bradleyPhoto,
+      tags: ['Arquitectura', 'Front-end', 'Back-end'],
+    },
+  ];
+
+  return (
+    <section id="nosotros" className="team-section full-bleed">
+      <div className="team-heading" data-reveal>
+        <div>
+          <span className="tag green">NOSOTROS</span>
+
+          <h2>Tres perfiles. Una misma forma de construir soluciones que funcionan.</h2>
+        </div>
+
+        <div className="team-heading-copy">
+          <p>
+            En EvolCorp unimos estrategia, dirección de proyectos y desarrollo
+            full stack para convertir necesidades reales en productos digitales
+            claros, confiables y listos para operar.
+          </p>
+
+          <span className="team-proof">
+            <strong>+50</strong> proyectos digitales desarrollados
+          </span>
+        </div>
+      </div>
+
+      <div className="team-grid">
+        {teamMembers.map(member => (
+          <article
+            className={`team-card ${member.featured ? 'is-featured' : ''}`}
+            key={member.name}
+            data-reveal
+          >
+            <div className="team-photo">
+              <span className="team-order">{member.order}</span>
+              <span className="team-ring" />
+              <img src={member.photo} alt={member.name} />
+            </div>
+
+            <div className="team-info">
+              <span className="team-label">{member.label}</span>
+              <h3>{member.name}</h3>
+              <p className="team-role">{member.role}</p>
+              <p className="team-description">{member.description}</p>
+
+              <div className="team-tags">
+                {member.tags.map(tag => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function Contact() {
   return (
     <section id="contacto" className="cta full-bleed" data-reveal>
@@ -1117,6 +1211,7 @@ function Footer() {
 
             <a href="#servicios">Servicios</a>
             <a href="#proyectos">Proyectos</a>
+            <a href="#nosotros">Nosotros</a>
             <a href="#casos">Casos destacados</a>
             <a href="#proceso">Nuestro proceso</a>
           </div>
@@ -1168,6 +1263,7 @@ function App() {
         <CaseStudies />
         <Process />
         <Benefits />
+        <Team />
         <Contact />
       </main>
 
