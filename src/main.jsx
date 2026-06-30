@@ -25,34 +25,38 @@ import {
 } from 'lucide-react';
 import './styles.css';
 
-import logoBlue from './assets/Version Azul.png';
-import logoDark from './assets/Version azul oscuro.png';
-import logoWhite from './assets/Version Blanca.png';
-import person1 from './assets/PERSONAJE 1.png';
-import person2 from './assets/PERSONAJE 2.png';
-import person3 from './assets/PERSONAJE 3.png';
-import person4 from './assets/PERSONAJE 4.png';
-import modulo2 from './assets/MODULO 2.png';
-import deyvidPhoto from './assets/equipo/Deyvid.png';
-import julianPhoto from './assets/equipo/Julian.png';
-import bradleyPhoto from './assets/equipo/Brad.png';
+const publicAsset = path => `${import.meta.env.BASE_URL}${path}`;
 
-import agrolecheLogo from './assets/clientes/Agroleche.png';
-import cdaLogo from './assets/clientes/CDA.png';
-import dipallLogo from './assets/clientes/Dipall.png';
-import sanAndresLogo from './assets/clientes/logoandres.png';
-import manantialLogo from './assets/clientes/logomanetial.png';
-import laVillaLogo from './assets/clientes/logovilla.png';
-import minaLogo from './assets/clientes/MInaustralia.webp';
-import nogalLogo from './assets/clientes/nogal.png';
-import parqueLogo from './assets/clientes/Parque.png';
-import vancouverLogo from './assets/clientes/vancouver.png';
-import superCashLogo from './assets/clientes/SuperCash.png';
-import gestionarLogo from './assets/clientes/Gestionar.png';
-import leonLogo from './assets/clientes/Leon.png';
-import gimnasioLogo from './assets/clientes/Gimnasio.png';
-import hedmontLogo from './assets/clientes/hedmont.png';
+const logoBlue = publicAsset('Version Azul.png');
+const logoDark = publicAsset('Version azul oscuro.png');
+const logoWhite = publicAsset('Version Blanca.png');
 
+const person1 = publicAsset('PERSONAJE 1.png');
+const person2 = publicAsset('PERSONAJE 2.png');
+const person3 = publicAsset('PERSONAJE 3.png');
+const person4 = publicAsset('PERSONAJE 4.png');
+const modulo2 = publicAsset('MODULO 2.png');
+
+const deyvidPhoto = publicAsset('equipo/Deyvid.png');
+const julianPhoto = publicAsset('equipo/Julian.png');
+const bradleyPhoto = publicAsset('equipo/Brad.png');
+
+const agrolecheLogo = publicAsset('clientes/Agroleche.png');
+const cdaLogo = publicAsset('clientes/CDA.png');
+const dipallLogo = publicAsset('clientes/Dipall.png');
+const sanAndresLogo = publicAsset('clientes/logoandres.png');
+const manantialLogo = publicAsset('clientes/logomanetial.png');
+const laVillaLogo = publicAsset('clientes/logovilla.png');
+const minaLogo = publicAsset('clientes/MInaustralia.webp');
+const nogalLogo = publicAsset('clientes/nogal.png');
+const parqueLogo = publicAsset('clientes/Parque.png');
+const vancouverLogo = publicAsset('clientes/vancouver.png');
+
+const superCashLogo = publicAsset('clientes/SuperCash.png');
+const gestionarLogo = publicAsset('clientes/Gestionar.png');
+const leonLogo = publicAsset('clientes/Leon.png');
+const gimnasioLogo = publicAsset('clientes/Gimnasio.png');
+const hedmontLogo = publicAsset('clientes/hedmont.png');
 const WA_MESSAGE = `Hola, equipo EvolCorp
 Estuve viendo su página y me llamó la atención cómo transforman procesos en herramientas digitales útiles.
 Tengo un reto en mi negocio que quiero organizar, automatizar o mejorar. Me gustaría contarles un poco y saber qué solución podrían proponerme.`;
@@ -1075,12 +1079,6 @@ function Benefits() {
 
   return (
     <section className="section full-bleed benefits-section">
-      <div data-reveal>
-        <span className="tag green">RESULTADOS</span>
-        <h2>Clásico en lo visual. Innovador en la forma de resolver.</h2>
-        <p>La tecnología debe sentirse simple para quien la usa y poderosa para quien toma decisiones.</p>
-      </div>
-
       <div className="benefit-list" data-reveal>
         {benefits.map(item => (
           <article key={item}>
@@ -1089,10 +1087,18 @@ function Benefits() {
           </article>
         ))}
       </div>
+
+      <div data-reveal>
+        <span className="tag green">RESULTADOS</span>
+        <h2>Clásico en lo visual. Innovador en la forma de resolver.</h2>
+        <p>
+          La tecnología debe sentirse simple para quien la usa y poderosa para
+          quien toma decisiones.
+        </p>
+      </div>
     </section>
   );
 }
-
 
 function Team() {
   const teamMembers = [

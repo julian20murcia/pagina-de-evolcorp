@@ -3643,3 +3643,151 @@ p,
     height: 88px;
   }
 }
+/* =========================================================
+   RITMO GLOBAL · ESPACIOS Y TIPOGRAFÍA UNIFICADOS
+   Pegar al final del styles.css
+   ========================================================= */
+
+:root {
+  --module-space: clamp(62px, 6vw, 82px);
+
+  /* Un tamaño para títulos principales de módulos */
+  --title-size: clamp(34px, 3.7vw, 50px);
+
+  /* Un tamaño para subtítulos / nombres de tarjetas */
+  --subtitle-size: clamp(20px, 1.8vw, 24px);
+
+  /* Un tamaño para textos descriptivos */
+  --description-size: 15px;
+  --description-line: 1.6;
+}
+
+/* Cada módulo conserva un único espacio antes del siguiente.
+   Se eliminan los dobles padding entre secciones consecutivas. */
+main > .section:not(.portfolio-section),
+main > .team-section {
+  padding: var(--module-space) 0 0;
+}
+
+/* El portafolio ya tiene padding interno por ser un panel. */
+main > .portfolio-section {
+  margin-top: var(--module-space);
+}
+
+/* El contacto conserva el mismo ritmo que los demás módulos. */
+main > .cta {
+  margin: var(--module-space) auto var(--module-space);
+}
+
+/* Evita separación adicional antes del footer */
+.site-footer {
+  margin-top: 0;
+}
+
+/* Espacio interno uniforme debajo de encabezados */
+.section-head,
+.team-heading {
+  margin-bottom: 32px;
+}
+
+.team-heading {
+  gap: clamp(28px, 4vw, 62px);
+}
+
+/* =========================================================
+   TÍTULOS PRINCIPALES DE MÓDULO
+   ========================================================= */
+
+.section-head h2,
+.benefits-section h2,
+.team-heading h2,
+.cta h2,
+.footer-cta h2 {
+  font-size: var(--title-size);
+  line-height: 1.06;
+  letter-spacing: -0.052em;
+}
+
+/* El hero conserva su jerarquía como titular principal */
+h1 {
+  line-height: 0.99;
+}
+
+/* =========================================================
+   SUBTÍTULOS / TÍTULOS DE TARJETAS
+   ========================================================= */
+
+.overview-card h2,
+.service-card h3,
+.portfolio-detail h3,
+.process-grid h3,
+.team-info h3,
+.case-card h3 {
+  font-size: var(--subtitle-size);
+  line-height: 1.14;
+  letter-spacing: -0.035em;
+}
+
+/* =========================================================
+   PÁRRAFOS Y DESCRIPCIONES
+   ========================================================= */
+
+.section-head p,
+.hero-left > p,
+.overview-card p,
+.build-card p,
+.service-card p,
+.portfolio-summary,
+.portfolio-detail-row p,
+.process-grid p,
+.benefits-section > div:first-child p,
+.team-heading-copy > p,
+.team-description,
+.cta p,
+.footer-brand-block p,
+.footer-cta p,
+.case-card p {
+  font-size: var(--description-size);
+  line-height: var(--description-line);
+}
+
+/* Textos secundarios conservan el mismo ritmo visual */
+.team-role,
+.overview-card li,
+.metrics span,
+.benefit-list article {
+  font-size: var(--description-size);
+  line-height: var(--description-line);
+}
+
+/* Evita que las descripciones del equipo creen alturas distintas */
+.team-description,
+.team-role {
+  min-height: 0;
+}
+
+/* =========================================================
+   MÓVIL
+   ========================================================= */
+
+@media (max-width: 620px) {
+  :root {
+    --module-space: 54px;
+    --title-size: clamp(30px, 9vw, 39px);
+    --subtitle-size: 21px;
+    --description-size: 14px;
+  }
+
+  .section-head,
+  .team-heading {
+    margin-bottom: 26px;
+  }
+
+  .team-heading {
+    gap: 22px;
+  }
+
+  main > .cta {
+    margin-bottom: 54px;
+  }
+}
