@@ -3430,3 +3430,216 @@ p,
 .team-photo::after {
   display: none;
 }
+
+/* =========================================================
+   PORTAFOLIO · 15 PROYECTOS
+   Mantiene el mosaico en escritorio y evita superposiciones
+   en tabletas y móviles.
+   ========================================================= */
+
+@media (min-width: 781px) {
+  .portfolio-logo-grid {
+    min-height: 570px;
+  }
+
+  .portfolio-logo-card {
+    width: 112px;
+    min-height: 112px;
+  }
+
+  .portfolio-logo-card .portfolio-logo-frame {
+    min-height: 65px;
+  }
+
+  .portfolio-logo-card .portfolio-logo-frame img {
+    height: 58px;
+  }
+
+  .portfolio-logo-card.is-active {
+    width: 214px;
+    min-height: 218px;
+  }
+
+  .portfolio-logo-card.is-active .portfolio-logo-frame {
+    min-height: 142px;
+  }
+
+  .portfolio-logo-card.is-active .portfolio-logo-frame img {
+    height: 122px;
+  }
+
+  .portfolio-logo-card:nth-child(1) {
+    --x: -240px;
+    --y: -188px;
+  }
+
+  .portfolio-logo-card:nth-child(2) {
+    --x: -120px;
+    --y: -218px;
+  }
+
+  .portfolio-logo-card:nth-child(3) {
+    --x: 0px;
+    --y: -226px;
+  }
+
+  .portfolio-logo-card:nth-child(4) {
+    --x: 120px;
+    --y: -218px;
+  }
+
+  .portfolio-logo-card:nth-child(5) {
+    --x: 240px;
+    --y: -188px;
+  }
+
+  .portfolio-logo-card:nth-child(6) {
+    --x: -250px;
+    --y: -64px;
+  }
+
+  .portfolio-logo-card:nth-child(7) {
+    --x: 250px;
+    --y: -64px;
+  }
+
+  .portfolio-logo-card:nth-child(8) {
+    --x: -250px;
+    --y: 74px;
+  }
+
+  .portfolio-logo-card:nth-child(9) {
+    --x: 250px;
+    --y: 74px;
+  }
+
+  .portfolio-logo-card:nth-child(10) {
+    --x: -240px;
+    --y: 198px;
+  }
+
+  .portfolio-logo-card:nth-child(11) {
+    --x: -144px;
+    --y: 222px;
+  }
+
+  .portfolio-logo-card:nth-child(12) {
+    --x: -48px;
+    --y: 226px;
+  }
+
+  .portfolio-logo-card:nth-child(13) {
+    --x: 48px;
+    --y: 226px;
+  }
+
+  .portfolio-logo-card:nth-child(14) {
+    --x: 144px;
+    --y: 222px;
+  }
+
+  .portfolio-logo-card:nth-child(15) {
+    --x: 240px;
+    --y: 198px;
+  }
+}
+
+@media (max-width: 780px) {
+  .portfolio-logo-grid {
+    min-height: auto;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    padding: 14px;
+    overflow: visible;
+  }
+
+  .portfolio-logo-grid::before {
+    width: 260px;
+  }
+
+  .portfolio-logo-card,
+  .portfolio-logo-card:nth-child(n) {
+    min-height: 108px;
+    width: 100%;
+    position: relative;
+    top: auto;
+    left: auto;
+    padding: 10px 8px;
+    opacity: 0.8;
+    transform: none;
+  }
+
+  .portfolio-logo-card:hover:not(.is-active) {
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .portfolio-logo-card .portfolio-logo-frame,
+  .portfolio-logo-card.is-active .portfolio-logo-frame {
+    min-height: 64px;
+  }
+
+  .portfolio-logo-card .portfolio-logo-frame img,
+  .portfolio-logo-card.is-active .portfolio-logo-frame img {
+    height: 56px;
+  }
+
+  .portfolio-logo-card.is-active {
+    min-height: 174px;
+    width: auto;
+    grid-column: 1 / -1;
+    padding: 14px 12px;
+    transform: none;
+  }
+
+  .portfolio-logo-card.is-active .portfolio-logo-frame {
+    min-height: 120px;
+  }
+
+  .portfolio-logo-card.is-active .portfolio-logo-frame img {
+    height: 104px;
+  }
+}
+
+@media (max-width: 620px) {
+  .portfolio-logo-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+    padding: 11px;
+  }
+
+  .portfolio-logo-card,
+  .portfolio-logo-card:nth-child(n) {
+    min-height: 92px;
+    padding: 8px 6px;
+    border-radius: 14px;
+  }
+
+  .portfolio-logo-card .portfolio-logo-frame,
+  .portfolio-logo-card.is-active .portfolio-logo-frame {
+    min-height: 56px;
+  }
+
+  .portfolio-logo-card .portfolio-logo-frame img,
+  .portfolio-logo-card.is-active .portfolio-logo-frame img {
+    height: 48px;
+  }
+
+  .portfolio-logo-card:not(.is-active) > span:last-child {
+    display: grid;
+    font-size: 9px;
+  }
+
+  .portfolio-logo-card.is-active {
+    min-height: 158px;
+    padding: 12px 9px;
+  }
+
+  .portfolio-logo-card.is-active .portfolio-logo-frame {
+    min-height: 104px;
+  }
+
+  .portfolio-logo-card.is-active .portfolio-logo-frame img {
+    height: 88px;
+  }
+}

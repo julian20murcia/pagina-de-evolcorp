@@ -12,7 +12,7 @@ import {
   LayoutDashboard,
   Menu,
   MonitorSmartphone,
-  PenTool,
+  BrainCircuit,
   Puzzle,
   Route,
   ShieldCheck,
@@ -47,6 +47,11 @@ import minaLogo from './assets/clientes/MInaustralia.webp';
 import nogalLogo from './assets/clientes/nogal.png';
 import parqueLogo from './assets/clientes/Parque.png';
 import vancouverLogo from './assets/clientes/vancouver.png';
+import superCashLogo from './assets/clientes/SuperCash.png';
+import gestionarLogo from './assets/clientes/Gestionar.png';
+import leonLogo from './assets/clientes/Leon.png';
+import gimnasioLogo from './assets/clientes/Gimnasio.png';
+import hedmontLogo from './assets/clientes/hedmont.png';
 
 const WA_MESSAGE = `Hola, equipo EvolCorp
 Estuve viendo su página y me llamó la atención cómo transforman procesos en herramientas digitales útiles.
@@ -530,90 +535,180 @@ const portfolioProjects = [
     name: 'Agroleche',
     category: 'Operación láctea',
     logo: agrolecheLogo,
-    summary: 'Control de recepción, calidad y trazabilidad para una operación láctea más clara.',
-    problem: 'La recepción de leche requería registrar variables de calidad y mantener control sobre una operación crítica.',
-    solution: 'Digitalizamos controles de recepción y calidad para centralizar la información de la operación diaria.',
+    summary:
+      'Control de recepción, calidad y trazabilidad para una operación láctea más clara.',
+    problem:
+      'La recepción de leche requería registrar variables de calidad y mantener control sobre una operación crítica.',
+    solution:
+      'Digitalizamos controles de recepción y calidad para centralizar la información de la operación diaria.',
   },
   {
     id: 'san-andres',
     name: 'Lácteos San Andrés',
     category: 'Compra de leche',
     logo: sanAndresLogo,
-    summary: 'Registro diario de compra de leche con mejor seguimiento de proveedores y entregas.',
-    problem: 'La compra diaria de leche necesitaba más orden para reducir reprocesos y facilitar seguimiento.',
-    solution: 'Organizamos la captura de información de compra y entrega en una experiencia digital más clara.',
+    summary:
+      'Registro diario de compra de leche con mejor seguimiento de proveedores y entregas.',
+    problem:
+      'La compra diaria de leche necesitaba más orden para reducir reprocesos y facilitar seguimiento.',
+    solution:
+      'Organizamos la captura de información de compra y entrega en una experiencia digital más clara.',
   },
   {
     id: 'nogal',
     name: 'El Nogal',
     category: 'Control operativo',
     logo: nogalLogo,
-    summary: 'Información centralizada para consultar rápidamente la operación diaria de compra y control.',
-    problem: 'Los datos de compra y control estaban dispersos y requerían una consulta más ágil.',
-    solution: 'Centralizamos los registros operativos para dar visibilidad rápida al equipo.',
+    summary:
+      'Información centralizada para consultar rápidamente la operación diaria de compra y control.',
+    problem:
+      'Los datos de compra y control estaban dispersos y requerían una consulta más ágil.',
+    solution:
+      'Centralizamos los registros operativos para dar visibilidad rápida al equipo.',
   },
   {
     id: 'villa',
     name: 'La Villa',
     category: 'Trazabilidad',
     logo: laVillaLogo,
-    summary: 'Gestión digital para mejorar la trazabilidad y el control cotidiano en recepción.',
-    problem: 'Los controles manuales de recepción dificultaban mantener información trazable y ordenada.',
-    solution: 'Convertimos la operación cotidiana en una gestión digital más clara y fácil de controlar.',
+    summary:
+      'Gestión digital para mejorar la trazabilidad y el control cotidiano en recepción.',
+    problem:
+      'Los controles manuales de recepción dificultaban mantener información trazable y ordenada.',
+    solution:
+      'Convertimos la operación cotidiana en una gestión digital más clara y fácil de controlar.',
   },
   {
     id: 'manantial',
     name: 'Compra de Leche El Manantial',
     category: 'Seguimiento de compra',
     logo: manantialLogo,
-    summary: 'Seguimiento ordenado del proceso de compra de leche y consolidación diaria de la información.',
-    problem: 'La información de compra requería consolidación y seguimiento más estructurado.',
-    solution: 'Diseñamos una solución para registrar y acompañar la compra diaria de leche.',
+    summary:
+      'Seguimiento ordenado del proceso de compra de leche y consolidación diaria de la información.',
+    problem:
+      'La información de compra requería consolidación y seguimiento más estructurado.',
+    solution:
+      'Diseñamos una solución para registrar y acompañar la compra diaria de leche.',
   },
   {
     id: 'vancouver',
     name: 'Vancouver',
     category: 'Gestión educativa y migratoria',
     logo: vancouverLogo,
-    summary: 'Estudiantes, clases, pagos y procesos migratorios conectados en una sola plataforma.',
-    problem: 'La operación requería controlar estudiantes, profesores, clases, pagos y procesos migratorios sin perder trazabilidad.',
-    solution: 'Centralizamos estudiantes, agenda, materiales, pagos, cotizaciones y seguimiento de procesos migratorios.',
+    summary:
+      'Estudiantes, clases, pagos y procesos migratorios conectados en una sola plataforma.',
+    problem:
+      'La operación requería controlar estudiantes, profesores, clases, pagos y procesos migratorios sin perder trazabilidad.',
+    solution:
+      'Centralizamos estudiantes, agenda, materiales, pagos, cotizaciones y seguimiento de procesos migratorios.',
   },
   {
     id: 'cda',
     name: 'CDA Farallones de Sutatausa',
     category: 'Servicios automotores',
     logo: cdaLogo,
-    summary: 'Una presencia digital clara para presentar sus servicios de revisión técnico-mecánica.',
-    problem: 'La información de servicios debía ser más clara y accesible para los usuarios del centro.',
-    solution: 'Diseñamos una experiencia digital informativa y confiable para presentar la operación del CDA.',
+    summary:
+      'Una presencia digital clara para presentar sus servicios de revisión técnico-mecánica.',
+    problem:
+      'La información de servicios debía ser más clara y accesible para los usuarios del centro.',
+    solution:
+      'Diseñamos una experiencia digital informativa y confiable para presentar la operación del CDA.',
   },
   {
     id: 'parque',
     name: 'Parque Cementerio Santo Cristo',
     category: 'Operación comercial y contratos',
     logo: parqueLogo,
-    summary: 'Cotizaciones, contratos, inventario y renovaciones centralizados en una sola plataforma.',
-    problem: 'La operación de espacios, ventas, contratos, mantenimientos y renovaciones requería mayor control.',
-    solution: 'Construimos una plataforma para centralizar cotizaciones, ventas, clientes, contratos e inventario de espacios.',
+    summary:
+      'Cotizaciones, contratos, inventario y renovaciones centralizados en una sola plataforma.',
+    problem:
+      'La operación de espacios, ventas, contratos, mantenimientos y renovaciones requería mayor control.',
+    solution:
+      'Construimos una plataforma para centralizar cotizaciones, ventas, clientes, contratos e inventario de espacios.',
   },
   {
     id: 'dipall',
     name: 'Dipall',
-    category: 'Presencia comercial',
+    category: 'Operación, producción y seguridad en alturas',
     logo: dipallLogo,
-    summary: 'Una vitrina digital para presentar productos técnicos de seguridad en alturas.',
-    problem: 'La marca necesitaba una presencia corporativa más sólida para explicar su oferta y generar confianza comercial.',
-    solution: 'Creamos un sitio corporativo enfocado en catálogo, información técnica y contacto comercial.',
+    summary:
+      'Plataforma integral para gestionar cotizaciones, producción, inventario, remisiones y cálculos técnicos de sistemas de seguridad en alturas.',
+    problem:
+      'La operación requería controlar de forma conectada los clientes, cotizaciones, órdenes de producción, materias primas, despachos, facturación y cálculos técnicos, evitando que la información quedara dispersa entre archivos y procesos manuales.',
+    solution:
+      'Desarrollamos un sistema de gestión con módulos de clientes, cotizaciones, remisiones, producción, inventario, movimientos, facturas, despachos y reportes. Además, incorporamos una calculadora técnica de líneas de vida con acceso para clientes y generación de informes en PDF.',
   },
   {
     id: 'mina',
     name: 'Mina Australia SAS',
-    category: 'Votaciones internas',
+    category: 'Monitoreo de gases y reportes',
     logo: minaLogo,
-    summary: 'Gestión clara de candidatos, elecciones y resultados para procesos internos.',
-    problem: 'Las elecciones internas requerían una herramienta más organizada, formal y trazable.',
-    solution: 'Desarrollamos una aplicación de escritorio para candidatos, elecciones, votación y resultados.',
+    summary:
+      'Sistema para registrar mediciones de gases dentro de mina y consolidar reportes operativos en Excel.',
+    problem:
+      'Las mediciones de gases requerían registro constante, control histórico y reportes organizados para facilitar el seguimiento de la operación minera.',
+    solution:
+      'Construimos una herramienta para capturar mediciones de gases, centralizar los registros y generar reportes en Excel listos para consulta y análisis.',
+  },
+  {
+    id: 'super-cash',
+    name: 'Super Cash Medellín',
+    category: 'Integración contable y facturación',
+    logo: superCashLogo,
+    summary:
+      'Plataforma de integración con Siigo para validar y procesar información contable y comercial desde archivos Excel.',
+    problem:
+      'La información de ventas, soportes y movimientos contables llegaba en archivos con formatos distintos, lo que generaba correcciones manuales, reprocesos y riesgos antes de cargarla al sistema contable.',
+    solution:
+      'Construimos un panel privado que autentica la conexión con Siigo, separa cada flujo de carga, previsualiza los archivos, detecta errores y permite corregir la información antes de enviarla.',
+  },
+  {
+    id: 'gestionar',
+    name: 'Gestionar Ltda.',
+    category: 'Certificados tributarios y operación empresarial',
+    logo: gestionarLogo,
+    summary:
+      'Ecosistema privado y público para solicitar, gestionar, validar y descargar certificados de retención, conectado con herramientas internas de operación.',
+    problem:
+      'La gestión de certificados, solicitudes y documentos requería atender consultas, aprobar entregas y mantener trazabilidad sin depender de correos, seguimiento manual o información dispersa.',
+    solution:
+      'Construimos un portal público para crear solicitudes, consultar estados y descargar certificados, junto con un back office con usuarios, roles, empresas, documentos PDF, notificaciones y control de solicitudes. Además, incorporamos módulos internos para clientes, ventas, cotizaciones, inventario y consulta de documentos DIAN.',
+  },
+  {
+    id: 'leon-asociados',
+    name: 'León Asociados',
+    category: 'Votaciones internas',
+    logo: leonLogo,
+    summary:
+      'Aplicación de escritorio para organizar candidatos, habilitar elecciones y consolidar resultados de procesos internos.',
+    problem:
+      'Los procesos de votación internos requerían una herramienta más ordenada, controlada y fácil de administrar, sin depender de registros manuales.',
+    solution:
+      'Desarrollamos una aplicación para gestionar candidatos, abrir y cerrar votaciones, registrar votos y consultar resultados de forma clara y centralizada.',
+  },
+  {
+    id: 'gimnasio-adn',
+    name: 'Gimnasio ADN',
+    category: 'Gestión de miembros y mensualidades',
+    logo: gimnasioLogo,
+    summary:
+      'Sistema para registrar usuarios, controlar mensualidades y consultar rápidamente quién está al día o tiene pagos pendientes.',
+    problem:
+      'El gimnasio necesitaba tener un registro organizado de sus usuarios y controlar los pagos mensuales sin depender de listas manuales o revisiones dispersas.',
+    solution:
+      'Desarrollamos una plataforma para registrar usuarios, gestionar mensualidades, identificar pagos pendientes y mantener el historial de cada cliente en un solo lugar.',
+  },
+  {
+    id: 'hedmont-lopez',
+    name: 'Hedmont López',
+    category: 'Soluciones migratorias',
+    logo: hedmontLogo,
+    summary:
+      'Solución digital para presentar servicios migratorios, orientar solicitudes y organizar el seguimiento de cada proceso.',
+    problem:
+      'Los procesos migratorios requieren información clara, recolección ordenada de datos y seguimiento constante para que cada persona entienda sus requisitos y avance sin perder etapas importantes.',
+    solution:
+      'Desarrollamos una experiencia digital para centralizar la presentación de servicios migratorios, recibir solicitudes iniciales, organizar la información de cada caso y facilitar el acompañamiento durante el proceso.',
   },
 ];
 
@@ -634,12 +729,31 @@ const solutionItems = [
 ];
 
 const services = [
-  ['Software a la medida', 'Creamos soluciones que se ajustan a tu operación y no al revés.', MonitorSmartphone],
-  ['Automatización de procesos', 'Reducimos tareas manuales y conectamos pasos que hoy consumen tiempo.', Zap],
-  ['Dashboards y reportes', 'Traducimos la operación en información clara para seguimiento y decisión.', LayoutDashboard],
-  ['Apps y portales', 'Desarrollamos experiencias web y móviles para equipos, clientes y usuarios de campo.', Smartphone],
-  ['Integración de operación', 'Unimos datos, módulos y flujos para que todo funcione como un sistema coherente.', Workflow],
-  ['Diseño de producto digital', 'Diseñamos experiencias sobrias, claras y listas para usarse todos los días.', PenTool],
+  [
+    'Software a la medida',
+    'Creamos soluciones digitales que se adaptan a tu operación, tus usuarios y la forma real en que trabaja tu equipo.',
+    MonitorSmartphone,
+  ],
+  [
+    'Automatización de procesos',
+    'Reducimos tareas manuales, conectamos pasos operativos y eliminamos reprocesos que consumen tiempo.',
+    Zap,
+  ],
+  [
+    'Inteligencia artificial aplicada',
+    'Integramos modelos de IA para clasificar información, asistir equipos, automatizar respuestas y convertir datos en acciones útiles.',
+    BrainCircuit,
+  ],
+  [
+    'Apps y portales',
+    'Desarrollamos experiencias web y móviles para equipos internos, clientes, usuarios de campo y procesos comerciales.',
+    Smartphone,
+  ],
+  [
+    'Integración de operación',
+    'Unimos datos, módulos y flujos para que toda la operación funcione como un sistema conectado y claro.',
+    Workflow,
+  ],
 ];
 
 const process = [
@@ -928,47 +1042,7 @@ function Portfolio() {
   );
 }
 
-function CaseStudies() {
-  const featured = portfolioProjects.filter(project =>
-    featuredCaseIds.includes(project.id),
-  );
 
-  return (
-    <section id="casos" className="section full-bleed">
-      <div className="section-head" data-reveal>
-        <span className="tag cyan">CASOS DESTACADOS</span>
-        <h2>Así traducimos la necesidad de un cliente en una solución clara.</h2>
-      </div>
-
-      <div className="case-grid">
-        {featured.map(project => (
-          <article className="case-card" key={project.id} data-reveal>
-            <div className="case-brand">
-              <img src={project.logo} alt={project.name} />
-            </div>
-
-            <h3>{project.name}</h3>
-
-            <div>
-              <b>Problema</b>
-              <p>{project.problem}</p>
-            </div>
-
-            <div>
-              <b>Solución EvolCorp</b>
-              <p>{project.solution}</p>
-            </div>
-
-            <div>
-              <b>Enfoque</b>
-              <p>{project.summary}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 function Process() {
   return (
@@ -1260,7 +1334,7 @@ function App() {
         <Metrics />
         <Services />
         <Portfolio />
-        <CaseStudies />
+       
         <Process />
         <Benefits />
         <Team />
