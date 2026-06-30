@@ -1605,3 +1605,311 @@ footer a {
     inset: 0 -4% -2% -4%;
   }
 }
+/* =========================================================
+   CONTACTO · EQUIPO EVOLCORP
+   ========================================================= */
+
+.cta {
+  min-height: 430px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cta-copy {
+  position: relative;
+  z-index: 5;
+  width: min(55%, 680px);
+}
+
+.cta-copy h2 {
+  max-width: 650px;
+}
+
+.cta-characters {
+  position: absolute;
+  right: clamp(16px, 2.4vw, 42px);
+  bottom: 0;
+  z-index: 2;
+  width: min(46%, 630px);
+  height: 100%;
+  pointer-events: none;
+}
+
+.cta-characters::before {
+  content: '';
+  position: absolute;
+  top: 16%;
+  right: 18%;
+  z-index: 0;
+  width: 46%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 255, 196, 0.18) 0%,
+    rgba(0, 186, 255, 0.09) 46%,
+    transparent 74%
+  );
+  filter: blur(10px);
+  animation: ctaAuraBreath 6s ease-in-out infinite;
+}
+
+.cta-characters::after {
+  content: '';
+  position: absolute;
+  right: 3%;
+  bottom: 12%;
+  z-index: 0;
+  width: 39%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 186, 255, 0.12) 0%,
+    transparent 72%
+  );
+  filter: blur(12px);
+}
+
+.cta-orbit {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  border: 1px solid rgba(0, 186, 255, 0.18);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.cta-orbit-one {
+  right: 5%;
+  bottom: 15%;
+  width: 84%;
+  height: 25%;
+  transform: rotate(-11deg);
+  animation: ctaOrbitFloat 10s ease-in-out infinite;
+}
+
+.cta-orbit-two {
+  right: 15%;
+  bottom: 22%;
+  width: 62%;
+  height: 18%;
+  border-color: rgba(0, 255, 196, 0.3);
+  transform: rotate(12deg);
+  animation: ctaOrbitFloatTwo 12s ease-in-out infinite;
+}
+
+.cta-character {
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  transform-origin: center bottom;
+  filter: drop-shadow(0 14px 18px rgba(0, 186, 255, 0.1));
+  will-change: transform;
+}
+
+/* Personaje verde principal */
+.cta-character-planner {
+  right: 42%;
+  z-index: 4;
+  height: 80%;
+  animation: ctaPlannerFloat 5.8s ease-in-out infinite;
+}
+
+/* Personaje azul izquierdo */
+.cta-character-analyst {
+  right: 69%;
+  z-index: 2;
+  height: 57%;
+  animation: ctaAnalystFloat 6.6s ease-in-out infinite;
+}
+
+/* Personaje azul con portátil */
+.cta-character-builder {
+  right: 18%;
+  z-index: 5;
+  height: 59%;
+  animation: ctaBuilderFloat 6.1s ease-in-out infinite;
+}
+
+/* Personaje violeta derecho */
+.cta-character-guide {
+  right: -1%;
+  z-index: 3;
+  height: 52%;
+  animation: ctaGuideFloat 6.9s ease-in-out infinite;
+}
+
+@keyframes ctaPlannerFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-0.6deg);
+  }
+
+  50% {
+    transform: translate3d(0, -9px, 0) rotate(0.7deg);
+  }
+}
+
+@keyframes ctaAnalystFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0.5deg);
+  }
+
+  50% {
+    transform: translate3d(-4px, -6px, 0) rotate(-0.5deg);
+  }
+}
+
+@keyframes ctaBuilderFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-0.5deg);
+  }
+
+  50% {
+    transform: translate3d(4px, -8px, 0) rotate(0.7deg);
+  }
+}
+
+@keyframes ctaGuideFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0.5deg);
+  }
+
+  50% {
+    transform: translate3d(-3px, -6px, 0) rotate(-0.5deg);
+  }
+}
+
+@keyframes ctaAuraBreath {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes ctaOrbitFloat {
+  0%,
+  100% {
+    transform: rotate(-11deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(-8deg) translateY(-4px);
+  }
+}
+
+@keyframes ctaOrbitFloatTwo {
+  0%,
+  100% {
+    transform: rotate(12deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(15deg) translateY(4px);
+  }
+}
+
+@media (max-width: 1020px) {
+  .cta {
+    min-height: 450px;
+  }
+
+  .cta-copy {
+    width: min(57%, 590px);
+  }
+
+  .cta-characters {
+    width: 48%;
+    right: 12px;
+  }
+
+  .cta-character-planner {
+    right: 40%;
+    height: 75%;
+  }
+
+  .cta-character-analyst {
+    right: 68%;
+    height: 52%;
+  }
+
+  .cta-character-builder {
+    right: 17%;
+    height: 55%;
+  }
+
+  .cta-character-guide {
+    height: 48%;
+  }
+}
+
+@media (max-width: 620px) {
+  .cta {
+    min-height: 620px;
+    padding-bottom: 282px;
+  }
+
+  .cta-copy {
+    width: 100%;
+  }
+
+  .cta-characters {
+    right: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 278px;
+  }
+
+  .cta-character-planner {
+    right: 40%;
+    height: 96%;
+  }
+
+  .cta-character-analyst {
+    right: 69%;
+    height: 63%;
+  }
+
+  .cta-character-builder {
+    right: 18%;
+    height: 65%;
+  }
+
+  .cta-character-guide {
+    right: -1%;
+    height: 58%;
+  }
+
+  .cta-orbit-one {
+    right: 4%;
+    bottom: 18%;
+    width: 84%;
+  }
+
+  .cta-orbit-two {
+    right: 15%;
+    bottom: 24%;
+    width: 60%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-characters::before,
+  .cta-orbit,
+  .cta-character {
+    animation: none !important;
+  }
+}

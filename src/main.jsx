@@ -29,6 +29,8 @@ import logoBlue from './assets/Version Azul.png';
 import logoDark from './assets/Version azul oscuro.png';
 import logoWhite from './assets/Version Blanca.png';
 import person1 from './assets/PERSONAJE 1.png';
+import person2 from './assets/PERSONAJE 2.png';
+import person3 from './assets/PERSONAJE 3.png';
 import person4 from './assets/PERSONAJE 4.png';
 import modulo2 from './assets/MODULO 2.png';
 
@@ -1013,19 +1015,58 @@ function Benefits() {
 function Contact() {
   return (
     <section id="contacto" className="cta full-bleed" data-reveal>
-      <div>
+      <div className="cta-copy">
         <span className="tag green">HABLEMOS DE TU PROYECTO</span>
-        <h2>Cuéntanos qué quieres mejorar y lo convertimos en producto digital.</h2>
-        <p>Conversemos sobre tu operación, tus usuarios y la solución que puede ayudarte a trabajar mejor.</p>
+
+        <h2>
+          Cuéntanos qué quieres mejorar y lo convertimos en producto digital.
+        </h2>
+
+        <p>
+          Conversemos sobre tu operación, tus usuarios y la solución que puede
+          ayudarte a trabajar mejor.
+        </p>
 
         <div className="cta-actions">
-          <a className="btn btn-dark" href={WA} target="_blank" rel="noreferrer">
+          <a
+            className="btn btn-dark"
+            href={WA}
+            target="_blank"
+            rel="noreferrer"
+          >
             Escribir por WhatsApp <ArrowRight size={16} />
           </a>
         </div>
       </div>
 
-      <img src={person4} alt="Ilustración EvolCorp" />
+      <div className="cta-characters" aria-hidden="true">
+        <span className="cta-orbit cta-orbit-one" />
+        <span className="cta-orbit cta-orbit-two" />
+
+        <img
+          className="cta-character cta-character-planner"
+          src={person1}
+          alt=""
+        />
+
+        <img
+          className="cta-character cta-character-analyst"
+          src={person2}
+          alt=""
+        />
+
+        <img
+          className="cta-character cta-character-builder"
+          src={person3}
+          alt=""
+        />
+
+        <img
+          className="cta-character cta-character-guide"
+          src={person4}
+          alt=""
+        />
+      </div>
     </section>
   );
 }
@@ -1048,10 +1089,7 @@ function Footer() {
   return (
     <footer className="full-bleed">
       <img src={logoDark} alt="EvolCorp" />
-      <p>Innovación en movimiento · Software a la medida</p>
-      <a href={WA} target="_blank" rel="noreferrer">
-        WhatsApp
-      </a>
+      
     </footer>
   );
 }
