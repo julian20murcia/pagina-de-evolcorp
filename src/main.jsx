@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import { createRoot } from 'react-dom/client';
 import * as THREE from 'three';
 import {
@@ -1078,7 +1078,7 @@ function Benefits() {
   ];
 
   return (
-    <section className="section full-bleed benefits-section">
+    <section className="section full-bleed benefits-section benefits-only">
       <div className="benefit-list" data-reveal>
         {benefits.map(item => (
           <article key={item}>
@@ -1086,15 +1086,6 @@ function Benefits() {
             <span>{item}</span>
           </article>
         ))}
-      </div>
-
-      <div data-reveal>
-        <span className="tag green">RESULTADOS</span>
-        <h2>Clásico en lo visual. Innovador en la forma de resolver.</h2>
-        <p>
-          La tecnología debe sentirse simple para quien la usa y poderosa para
-          quien toma decisiones.
-        </p>
       </div>
     </section>
   );
@@ -1266,8 +1257,6 @@ function Footer() {
   return (
     <footer className="site-footer">
       <div className="full-bleed footer-wrap">
-       
-
         <div className="footer-main" data-reveal>
           <div className="footer-brand-block">
             <a
@@ -1282,8 +1271,6 @@ function Footer() {
               Software a la medida para ordenar procesos, conectar equipos y
               convertir operaciones reales en productos digitales útiles.
             </p>
-
-            
           </div>
 
           <div className="footer-link-group">
@@ -1304,6 +1291,15 @@ function Footer() {
             <a href={WA} target="_blank" rel="noreferrer">
               <FaWhatsapp size={17} />
               WhatsApp
+            </a>
+
+            <a
+              href="https://www.instagram.com/evolcorp_?igsh=ejNvbms0NGpjajJ2"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaInstagram size={17} />
+              Instagram
             </a>
 
             <a href={WA} target="_blank" rel="noreferrer">
