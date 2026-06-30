@@ -1,0 +1,1047 @@
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import * as THREE from 'three';
+import {
+  AlertTriangle,
+  ArrowRight,
+  CheckCircle2,
+  Clock3,
+  FileText,
+  Fingerprint,
+  LayoutDashboard,
+  Menu,
+  MessageCircle,
+  MonitorSmartphone,
+  PenTool,
+  Puzzle,
+  Route,
+  ShieldCheck,
+  Smartphone,
+  TrendingUp,
+  Users,
+  Workflow,
+  X,
+  Zap,
+} from 'lucide-react';
+import './styles.css';
+
+import logoBlue from './assets/Version Azul.png';
+import logoDark from './assets/Version azul oscuro.png';
+import logoWhite from './assets/Version Blanca.png';
+import person1 from './assets/PERSONAJE 1.png';
+import person4 from './assets/PERSONAJE 4.png';
+import modulo2 from './assets/MODULO 2.png';
+
+import agrolecheLogo from './assets/clientes/Agroleche.png';
+import cdaLogo from './assets/clientes/CDA.png';
+import dipallLogo from './assets/clientes/Dipall.png';
+import sanAndresLogo from './assets/clientes/logoandres.png';
+import manantialLogo from './assets/clientes/logomanetial.png';
+import laVillaLogo from './assets/clientes/logovilla.png';
+import minaLogo from './assets/clientes/MInaustralia.webp';
+import nogalLogo from './assets/clientes/nogal.png';
+import parqueLogo from './assets/clientes/Parque.png';
+import vancouverLogo from './assets/clientes/vancouver.png';
+
+const WA =
+  'https://wa.me/573232220691?text=Hola%20EvolCorp,%20quiero%20hablar%20sobre%20un%20proyecto%20digital';
+
+function useReveal() {
+  useEffect(() => {
+    const targets = [...document.querySelectorAll('[data-reveal]')];
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.14, rootMargin: '0px 0px -6% 0px' },
+    );
+
+    targets.forEach((target, index) => {
+      target.style.setProperty('--delay', `${Math.min(index % 6, 5) * 70}ms`);
+      observer.observe(target);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+}
+
+function RubikCubeScene() {
+  const mountRef = useRef(null);
+
+  useEffect(() => {
+    const mount = mountRef.current;
+    if (!mount) return undefined;
+
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(
+      34,
+      Math.max(mount.clientWidth, 1) / Math.max(mount.clientHeight, 1),
+      0.1,
+      100,
+    );
+
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance',
+    });
+
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.35));
+    renderer.setSize(mount.clientWidth, mount.clientHeight);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.12;
+
+    mount.appendChild(renderer.domElement);
+
+    const rig = new THREE.Group();
+    rig.rotation.set(-0.08, -0.18, 0.02);
+    scene.add(rig);
+
+    const cubeRoot = new THREE.Group();
+    cubeRoot.position.set(0.28, 0.03, 0);
+    rig.add(cubeRoot);
+
+    const cubeSize = 0.84;
+    const spacing = 0.92;
+
+    const geometry = new THREE.BoxGeometry(
+      cubeSize,
+      cubeSize,
+      cubeSize,
+      2,
+      2,
+      2,
+    );
+
+    const edgeGeometry = new THREE.EdgesGeometry(geometry, 18);
+
+    const palette = [
+      '#05072f',
+      '#083f8c',
+      '#0069d9',
+      '#0099e8',
+      '#00baff',
+      '#00d8df',
+      '#00ffc4',
+      '#3eeac4',
+      '#8cf5ed',
+      '#dffcff',
+    ];
+
+    const cubies = [];
+
+    const randomVector = () =>
+      new THREE.Vector3(
+        Math.random() - 0.5,
+        Math.random() - 0.5,
+        Math.random() - 0.5,
+      ).normalize();
+
+    let index = 0;
+
+    [-1, 0, 1].forEach(y => {
+      [-1, 0, 1].forEach(x => {
+        [-1, 0, 1].forEach(z => {
+          const target = new THREE.Vector3(
+            x * spacing,
+            y * spacing,
+            z * spacing,
+          );
+
+          const direction = target.clone();
+
+          if (direction.lengthSq() < 0.01) {
+            direction.set(0.2, 0.32, 1);
+          }
+
+          direction.normalize();
+
+          const start = target
+            .clone()
+            .add(direction.multiplyScalar(0.58 + Math.random() * 0.42))
+            .add(randomVector().multiplyScalar(0.16 + Math.random() * 0.14));
+
+          const color =
+            palette[(index * 5 + x - y + z + 17) % palette.length];
+
+          const material = new THREE.MeshStandardMaterial({
+            color,
+            roughness: 0.25,
+            metalness: 0.18,
+            emissive: new THREE.Color(color).multiplyScalar(0.08),
+            emissiveIntensity: 0.48,
+          });
+
+          const cubie = new THREE.Mesh(geometry, material);
+
+          cubie.position.copy(start);
+
+          cubie.rotation.set(
+            (Math.random() - 0.5) * Math.PI * 1.1,
+            (Math.random() - 0.5) * Math.PI * 1.1,
+            (Math.random() - 0.5) * Math.PI * 1.1,
+          );
+
+          const edges = new THREE.LineSegments(
+            edgeGeometry,
+            new THREE.LineBasicMaterial({
+              color: '#ffffff',
+              transparent: true,
+              opacity: 0.22,
+            }),
+          );
+
+          cubie.add(edges);
+          cubeRoot.add(cubie);
+
+          cubies.push({
+            cubie,
+            target,
+            start,
+            rotation: cubie.rotation.clone(),
+            delay: 0.03 + Math.random() * 0.44,
+          });
+
+          index += 1;
+        });
+      });
+    });
+
+    const textureLoader = new THREE.TextureLoader();
+    const logoTexture = textureLoader.load(logoWhite);
+
+    logoTexture.colorSpace = THREE.SRGBColorSpace;
+    logoTexture.minFilter = THREE.LinearFilter;
+
+    const logoMaterial = new THREE.MeshBasicMaterial({
+      map: logoTexture,
+      transparent: true,
+      opacity: 0,
+      depthWrite: false,
+    });
+
+    const logoPlane = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.66, 1.3),
+      logoMaterial,
+    );
+
+    logoPlane.position.set(0, -0.02, 1.42);
+    cubeRoot.add(logoPlane);
+
+    const logoGlow = new THREE.Mesh(
+      new THREE.PlaneGeometry(3.1, 1.6),
+      new THREE.MeshBasicMaterial({
+        color: '#00d8df',
+        transparent: true,
+        opacity: 0.025,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      }),
+    );
+
+    logoGlow.position.set(0, -0.02, 1.4);
+    cubeRoot.add(logoGlow);
+
+    const floor = new THREE.Group();
+    floor.position.y = -1.72;
+    floor.rotation.x = Math.PI / 2;
+    scene.add(floor);
+
+    [2.02, 2.64].forEach((radius, ringIndex) => {
+      const ring = new THREE.Mesh(
+        new THREE.TorusGeometry(
+          radius,
+          0.012 + ringIndex * 0.004,
+          8,
+          150,
+        ),
+        new THREE.MeshBasicMaterial({
+          color: ringIndex === 0 ? '#00baff' : '#00ffc4',
+          transparent: true,
+          opacity: 0.12 - ringIndex * 0.018,
+        }),
+      );
+
+      floor.add(ring);
+    });
+
+    const particlePositions = [];
+
+    for (let particle = 0; particle < 42; particle += 1) {
+      const radius = 1.2 + Math.random() * 2.2;
+      const angle = Math.random() * Math.PI * 2;
+
+      particlePositions.push(
+        Math.cos(angle) * radius,
+        (Math.random() - 0.5) * 2.6,
+        Math.sin(angle) * radius * 0.38,
+      );
+    }
+
+    const particlesGeometry = new THREE.BufferGeometry();
+
+    particlesGeometry.setAttribute(
+      'position',
+      new THREE.Float32BufferAttribute(particlePositions, 3),
+    );
+
+    const particles = new THREE.Points(
+      particlesGeometry,
+      new THREE.PointsMaterial({
+        color: '#00d8df',
+        size: 0.018,
+        transparent: true,
+        opacity: 0.2,
+      }),
+    );
+
+    scene.add(particles);
+
+    scene.add(new THREE.HemisphereLight('#ffffff', '#08205b', 1.65));
+
+    const keyLight = new THREE.PointLight('#00ffc4', 21, 18, 2);
+    keyLight.position.set(4, 4.2, 5.3);
+    scene.add(keyLight);
+
+    const rimLight = new THREE.PointLight('#00baff', 19, 16, 2);
+    rimLight.position.set(-4, 1.3, 4);
+    scene.add(rimLight);
+
+    const frontLight = new THREE.PointLight('#dfffff', 11, 13, 2);
+    frontLight.position.set(0, -1.8, 5.2);
+    scene.add(frontLight);
+
+    let targetRotationY = -0.18;
+    let targetRotationX = -0.08;
+
+    const onPointerMove = event => {
+      if (window.innerWidth <= 620) return;
+
+      const rect = mount.getBoundingClientRect();
+
+      const pointerX =
+        ((event.clientX - rect.left) / rect.width - 0.5) * 0.38;
+
+      const pointerY =
+        ((event.clientY - rect.top) / rect.height - 0.5) * 0.24;
+
+      targetRotationY = -0.18 + pointerX;
+      targetRotationX = -0.08 + pointerY;
+
+      /* Movimiento inmediato al puntero */
+      rig.rotation.y = targetRotationY;
+      rig.rotation.x = targetRotationX;
+    };
+
+    const onPointerLeave = () => {
+      targetRotationY = -0.18;
+      targetRotationX = -0.08;
+    };
+
+    mount.addEventListener('pointermove', onPointerMove);
+    mount.addEventListener('pointerleave', onPointerLeave);
+
+    const clock = new THREE.Clock();
+    let frameId;
+    let elapsed = 0;
+
+    const smoothstep = value => value * value * (3 - 2 * value);
+
+    const render = () => {
+      const delta = Math.min(clock.getDelta(), 0.05);
+      elapsed += delta;
+
+      const time = elapsed;
+
+      const assembleDuration = 2.75;
+      const holdDuration = 2.5;
+      const disassembleDuration = 2.65;
+      const restDuration = 0.85;
+
+      const loop =
+        assembleDuration +
+        holdDuration +
+        disassembleDuration +
+        restDuration;
+
+      const phase = time % loop;
+      let completion = 0;
+
+      cubies.forEach(
+        ({ cubie, target, start, rotation, delay }, cubieIndex) => {
+          let progress = 0;
+
+          if (phase < assembleDuration) {
+            progress = smoothstep(
+              Math.max(
+                0,
+                Math.min(
+                  1,
+                  (phase - delay) / (assembleDuration - 0.24),
+                ),
+              ),
+            );
+          } else if (phase < assembleDuration + holdDuration) {
+            progress = 1;
+          } else if (
+            phase <
+            assembleDuration + holdDuration + disassembleDuration
+          ) {
+            const local = phase - assembleDuration - holdDuration;
+
+            progress =
+              1 -
+              smoothstep(
+                Math.max(
+                  0,
+                  Math.min(
+                    1,
+                    (local - delay * 0.42) /
+                      (disassembleDuration - 0.2),
+                  ),
+                ),
+              );
+          }
+
+          completion += progress;
+
+          cubie.position.lerpVectors(start, target, progress);
+
+          cubie.rotation.set(
+            rotation.x * (1 - progress) +
+              Math.sin(time * 0.9 + cubieIndex) * 0.008 * progress,
+            rotation.y * (1 - progress) +
+              Math.cos(time * 0.85 + cubieIndex) * 0.006 * progress,
+            rotation.z * (1 - progress) +
+              Math.sin(time + cubieIndex) * 0.006 * progress,
+          );
+
+          cubie.scale.setScalar(0.94 + progress * 0.06);
+        },
+      );
+
+      const assembled = completion / cubies.length;
+
+      logoMaterial.opacity = Math.max(
+        0,
+        Math.min(1, (assembled - 0.84) / 0.16),
+      );
+
+      logoGlow.material.opacity = 0.025 + logoMaterial.opacity * 0.085;
+
+      /* Solo vuelve suavemente al centro al sacar el mouse */
+      rig.rotation.y += (targetRotationY - rig.rotation.y) * 0.22;
+      rig.rotation.x += (targetRotationX - rig.rotation.x) * 0.22;
+
+      cubeRoot.rotation.y = Math.sin(time * 0.24) * 0.025;
+      cubeRoot.rotation.x = Math.sin(time * 0.32) * 0.012;
+
+      rig.position.y = Math.sin(time * 0.45) * 0.035;
+      particles.rotation.y = time * 0.006;
+      floor.rotation.z = time * 0.018;
+
+      renderer.render(scene, camera);
+      frameId = requestAnimationFrame(render);
+    };
+
+    const resizeScene = () => {
+      const width = Math.max(mount.clientWidth, 1);
+      const height = Math.max(mount.clientHeight, 1);
+      const isMobile = window.innerWidth <= 620;
+
+      camera.aspect = width / height;
+      camera.position.set(0, 0.18, isMobile ? 9.5 : 8.45);
+      camera.updateProjectionMatrix();
+
+      cubeRoot.scale.setScalar(isMobile ? 0.87 : 1);
+      cubeRoot.position.x = isMobile ? 0 : 0.28;
+
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.35));
+      renderer.setSize(width, height, false);
+    };
+
+    const resizeObserver = new ResizeObserver(resizeScene);
+
+    resizeObserver.observe(mount);
+    window.addEventListener('resize', resizeScene);
+
+    resizeScene();
+    render();
+
+    return () => {
+      cancelAnimationFrame(frameId);
+
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', resizeScene);
+      mount.removeEventListener('pointermove', onPointerMove);
+      mount.removeEventListener('pointerleave', onPointerLeave);
+
+      scene.traverse(object => {
+        if (object.geometry) object.geometry.dispose();
+
+        if (object.material) {
+          const materials = Array.isArray(object.material)
+            ? object.material
+            : [object.material];
+
+          materials.forEach(material => {
+            if (material.map) material.map.dispose();
+            material.dispose();
+          });
+        }
+      });
+
+      renderer.dispose();
+
+      if (renderer.domElement.parentNode === mount) {
+        mount.removeChild(renderer.domElement);
+      }
+    };
+  }, []);
+
+  return (
+    <div
+      className="rubik-scene"
+      ref={mountRef}
+      aria-label="Cubo EvolCorp que se arma y se desarma"
+    />
+  );
+}
+
+const portfolioProjects = [
+  {
+    id: 'agroleche',
+    name: 'Agroleche',
+    category: 'Operación láctea',
+    logo: agrolecheLogo,
+    summary: 'Control de recepción, calidad y trazabilidad para una operación láctea más clara.',
+    problem: 'La recepción de leche requería registrar variables de calidad y mantener control sobre una operación crítica.',
+    solution: 'Digitalizamos controles de recepción y calidad para centralizar la información de la operación diaria.',
+  },
+  {
+    id: 'san-andres',
+    name: 'Lácteos San Andrés',
+    category: 'Compra de leche',
+    logo: sanAndresLogo,
+    summary: 'Registro diario de compra de leche con mejor seguimiento de proveedores y entregas.',
+    problem: 'La compra diaria de leche necesitaba más orden para reducir reprocesos y facilitar seguimiento.',
+    solution: 'Organizamos la captura de información de compra y entrega en una experiencia digital más clara.',
+  },
+  {
+    id: 'nogal',
+    name: 'El Nogal',
+    category: 'Control operativo',
+    logo: nogalLogo,
+    summary: 'Información centralizada para consultar rápidamente la operación diaria de compra y control.',
+    problem: 'Los datos de compra y control estaban dispersos y requerían una consulta más ágil.',
+    solution: 'Centralizamos los registros operativos para dar visibilidad rápida al equipo.',
+  },
+  {
+    id: 'villa',
+    name: 'La Villa',
+    category: 'Trazabilidad',
+    logo: laVillaLogo,
+    summary: 'Gestión digital para mejorar la trazabilidad y el control cotidiano en recepción.',
+    problem: 'Los controles manuales de recepción dificultaban mantener información trazable y ordenada.',
+    solution: 'Convertimos la operación cotidiana en una gestión digital más clara y fácil de controlar.',
+  },
+  {
+    id: 'manantial',
+    name: 'Compra de Leche El Manantial',
+    category: 'Seguimiento de compra',
+    logo: manantialLogo,
+    summary: 'Seguimiento ordenado del proceso de compra de leche y consolidación diaria de la información.',
+    problem: 'La información de compra requería consolidación y seguimiento más estructurado.',
+    solution: 'Diseñamos una solución para registrar y acompañar la compra diaria de leche.',
+  },
+  {
+    id: 'vancouver',
+    name: 'Vancouver',
+    category: 'Gestión educativa y migratoria',
+    logo: vancouverLogo,
+    summary: 'Estudiantes, clases, pagos y procesos migratorios conectados en una sola plataforma.',
+    problem: 'La operación requería controlar estudiantes, profesores, clases, pagos y procesos migratorios sin perder trazabilidad.',
+    solution: 'Centralizamos estudiantes, agenda, materiales, pagos, cotizaciones y seguimiento de procesos migratorios.',
+  },
+  {
+    id: 'cda',
+    name: 'CDA Farallones de Sutatausa',
+    category: 'Servicios automotores',
+    logo: cdaLogo,
+    summary: 'Una presencia digital clara para presentar sus servicios de revisión técnico-mecánica.',
+    problem: 'La información de servicios debía ser más clara y accesible para los usuarios del centro.',
+    solution: 'Diseñamos una experiencia digital informativa y confiable para presentar la operación del CDA.',
+  },
+  {
+    id: 'parque',
+    name: 'Parque Cementerio Santo Cristo',
+    category: 'Operación comercial y contratos',
+    logo: parqueLogo,
+    summary: 'Cotizaciones, contratos, inventario y renovaciones centralizados en una sola plataforma.',
+    problem: 'La operación de espacios, ventas, contratos, mantenimientos y renovaciones requería mayor control.',
+    solution: 'Construimos una plataforma para centralizar cotizaciones, ventas, clientes, contratos e inventario de espacios.',
+  },
+  {
+    id: 'dipall',
+    name: 'Dipall',
+    category: 'Presencia comercial',
+    logo: dipallLogo,
+    summary: 'Una vitrina digital para presentar productos técnicos de seguridad en alturas.',
+    problem: 'La marca necesitaba una presencia corporativa más sólida para explicar su oferta y generar confianza comercial.',
+    solution: 'Creamos un sitio corporativo enfocado en catálogo, información técnica y contacto comercial.',
+  },
+  {
+    id: 'mina',
+    name: 'Mina Australia SAS',
+    category: 'Votaciones internas',
+    logo: minaLogo,
+    summary: 'Gestión clara de candidatos, elecciones y resultados para procesos internos.',
+    problem: 'Las elecciones internas requerían una herramienta más organizada, formal y trazable.',
+    solution: 'Desarrollamos una aplicación de escritorio para candidatos, elecciones, votación y resultados.',
+  },
+];
+
+const featuredCaseIds = ['agroleche', 'vancouver', 'parque', 'dipall', 'mina'];
+
+const problemItems = [
+  ['Procesos lentos y manuales', Clock3],
+  ['Falta de visibilidad y control', AlertTriangle],
+  ['Sistemas que no se integran', Puzzle],
+  ['Dificultad para escalar', TrendingUp],
+];
+
+const solutionItems = [
+  'Automatizamos tareas repetitivas y reducimos fricción operativa.',
+  'Centralizamos información para que el equipo tenga claridad.',
+  'Diseñamos soluciones pensadas para la forma real de trabajar.',
+  'Acompañamos la implementación hasta dejarla lista para operar.',
+];
+
+const services = [
+  ['Software a la medida', 'Creamos soluciones que se ajustan a tu operación y no al revés.', MonitorSmartphone],
+  ['Automatización de procesos', 'Reducimos tareas manuales y conectamos pasos que hoy consumen tiempo.', Zap],
+  ['Dashboards y reportes', 'Traducimos la operación en información clara para seguimiento y decisión.', LayoutDashboard],
+  ['Apps y portales', 'Desarrollamos experiencias web y móviles para equipos, clientes y usuarios de campo.', Smartphone],
+  ['Integración de operación', 'Unimos datos, módulos y flujos para que todo funcione como un sistema coherente.', Workflow],
+  ['Diseño de producto digital', 'Diseñamos experiencias sobrias, claras y listas para usarse todos los días.', PenTool],
+];
+
+const process = [
+  ['01', 'Diagnóstico', 'Entendemos el proceso real, los usuarios y lo que hoy necesita mejorar.'],
+  ['02', 'Diseño', 'Definimos una experiencia clara, módulos y flujos pensados para operar.'],
+  ['03', 'Construcción', 'Desarrollamos la solución y conectamos lo necesario para ponerla a funcionar.'],
+  ['04', 'Entrega', 'Probamos, ajustamos y acompañamos el paso a una operación digital más ordenada.'],
+];
+
+function Header() {
+  const [open, setOpen] = useState(false);
+
+  const links = [
+    ['Servicios', '#servicios'],
+    ['Proyectos', '#proyectos'],
+    ['Proceso', '#proceso'],
+    ['Casos', '#casos'],
+    ['Contacto', '#contacto'],
+  ];
+
+  return (
+    <header className="site-header">
+      <a className="brand" href="#inicio" aria-label="EvolCorp inicio">
+        <img src={logoBlue} alt="EvolCorp" />
+      </a>
+
+      <nav>
+        {links.map(([label, href]) => (
+          <a key={label} href={href}>
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      <a className="btn btn-gradient nav-cta" href={WA} target="_blank" rel="noreferrer">
+        Cotizar proyecto <ArrowRight size={16} />
+      </a>
+
+      <button className="menu" onClick={() => setOpen(true)} aria-label="Abrir menú">
+        <Menu size={22} />
+      </button>
+
+      {open && (
+        <div className="mobile-menu">
+          <button onClick={() => setOpen(false)} aria-label="Cerrar menú">
+            <X />
+          </button>
+
+          {links.map(([label, href]) => (
+            <a key={label} onClick={() => setOpen(false)} href={href}>
+              {label}
+            </a>
+          ))}
+
+          <a className="btn btn-gradient" href={WA} target="_blank" rel="noreferrer">
+            Cotizar proyecto <ArrowRight size={16} />
+          </a>
+        </div>
+      )}
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <section id="inicio" className="hero full-bleed">
+      <div className="hero-left" data-reveal>
+        <h1>
+          Software que <span>ordena</span> lo que hoy te quita tiempo.
+        </h1>
+
+        <p>
+          Convertimos procesos dispersos en productos digitales claros,
+          confiables y listos para operar todos los días.
+        </p>
+
+        <div className="hero-actions">
+          <a className="btn btn-gradient" href="#proyectos">
+            Ver proyectos <ArrowRight size={16} />
+          </a>
+
+          <a
+            className="btn btn-soft"
+            href={WA}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Hablemos de tu proceso
+          </a>
+        </div>
+      </div>
+
+      <div className="hero-right" data-reveal>
+        <RubikCubeScene />
+      </div>
+    </section>
+  );
+}
+
+function OverviewCards() {
+  return (
+    <section className="overview full-bleed" data-reveal>
+      <article className="overview-card problem-card">
+        <img src={person1} alt="Ilustración de análisis" />
+
+        <div>
+          <span className="tag">EL PROBLEMA</span>
+          <h2>Sabemos lo que <strong>te detiene.</strong></h2>
+
+          <ul>
+            {problemItems.map(([label, Icon]) => (
+              <li key={label}>
+                <Icon size={18} /> {label}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </article>
+
+      <article className="overview-card solution-card">
+        <img src={modulo2} alt="Módulos conectados" />
+
+        <div>
+          <span className="tag green">NUESTRA SOLUCIÓN</span>
+          <h2>Creamos tecnología que <strong>impulsa resultados.</strong></h2>
+
+          <ul>
+            {solutionItems.map(label => (
+              <li key={label}>
+                <CheckCircle2 size={18} /> {label}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </article>
+
+      <article className="overview-card build-card">
+        <div>
+          <span className="tag cyan">LO QUE CONSTRUIMOS</span>
+          <h2>Productos digitales para <strong>operar mejor.</strong></h2>
+          <p>
+            Sistemas internos, portales, aplicaciones de campo, procesos
+            comerciales, reportes y experiencias para equipos y clientes.
+          </p>
+        </div>
+      </article>
+    </section>
+  );
+}
+
+function Metrics() {
+  const values = [
+    ['A medida', 'Cada solución parte de una necesidad real.', ShieldCheck],
+    ['Conectado', 'Procesos y equipos en una sola experiencia.', Workflow],
+    ['Claro', 'Información útil para seguir y decidir.', LayoutDashboard],
+    ['Acompañado', 'Implementación pensada para operar de verdad.', CheckCircle2],
+  ];
+
+  return (
+    <section className="metrics full-bleed" data-reveal>
+      {values.map(([title, text, Icon]) => (
+        <article key={title}>
+          <Icon />
+          <strong>{title}</strong>
+          <span>{text}</span>
+        </article>
+      ))}
+    </section>
+  );
+}
+
+function Services() {
+  return (
+    <section id="servicios" className="section full-bleed">
+      <div className="section-head" data-reveal>
+        <span className="tag">SERVICIOS</span>
+        <h2>Construimos tecnología útil para resolver una operación real.</h2>
+      </div>
+
+      <div className="service-grid">
+        {services.map(([title, text, Icon]) => (
+          <article className="service-card" key={title} data-reveal>
+            <Icon />
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Portfolio() {
+  const [activeId, setActiveId] = useState(portfolioProjects[0].id);
+
+  const activeProject = useMemo(
+    () =>
+      portfolioProjects.find(project => project.id === activeId) ||
+      portfolioProjects[0],
+    [activeId],
+  );
+
+  return (
+    <section id="proyectos" className="section full-bleed soft-panel portfolio-section">
+      <div className="section-head" data-reveal>
+        <span className="tag green">PORTAFOLIO REAL</span>
+        <h2>Proyectos que partieron de problemas concretos.</h2>
+        <p>Selecciona una organización para ver el enfoque de la solución que construimos.</p>
+      </div>
+
+      <div className="portfolio-layout" data-reveal>
+        <div className="portfolio-logo-grid" role="tablist" aria-label="Proyectos EvolCorp">
+          {portfolioProjects.map(project => (
+            <button
+              className={`portfolio-logo-card ${project.id === activeProject.id ? 'is-active' : ''}`}
+              key={project.id}
+              type="button"
+              onClick={() => setActiveId(project.id)}
+              aria-pressed={project.id === activeProject.id}
+            >
+              <span className="portfolio-logo-frame">
+                <img src={project.logo} alt={project.name} />
+              </span>
+
+              <span>{project.name}</span>
+            </button>
+          ))}
+        </div>
+
+        <aside className="portfolio-detail">
+          <img src={activeProject.logo} alt="" aria-hidden="true" />
+          <span className="tag cyan">{activeProject.category}</span>
+          <h3>{activeProject.name}</h3>
+          <p className="portfolio-summary">{activeProject.summary}</p>
+
+          <div className="portfolio-detail-row">
+            <b>Reto</b>
+            <p>{activeProject.problem}</p>
+          </div>
+
+          <div className="portfolio-detail-row">
+            <b>Respuesta EvolCorp</b>
+            <p>{activeProject.solution}</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  );
+}
+
+function CaseStudies() {
+  const featured = portfolioProjects.filter(project =>
+    featuredCaseIds.includes(project.id),
+  );
+
+  return (
+    <section id="casos" className="section full-bleed">
+      <div className="section-head" data-reveal>
+        <span className="tag cyan">CASOS DESTACADOS</span>
+        <h2>Así traducimos la necesidad de un cliente en una solución clara.</h2>
+      </div>
+
+      <div className="case-grid">
+        {featured.map(project => (
+          <article className="case-card" key={project.id} data-reveal>
+            <div className="case-brand">
+              <img src={project.logo} alt={project.name} />
+            </div>
+
+            <h3>{project.name}</h3>
+
+            <div>
+              <b>Problema</b>
+              <p>{project.problem}</p>
+            </div>
+
+            <div>
+              <b>Solución EvolCorp</b>
+              <p>{project.solution}</p>
+            </div>
+
+            <div>
+              <b>Enfoque</b>
+              <p>{project.summary}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Process() {
+  return (
+    <section id="proceso" className="section full-bleed process-section">
+      <div className="section-head center" data-reveal>
+        <span className="tag">PROCESO</span>
+        <h2>Una ruta clara desde el problema hasta una solución lista para operar.</h2>
+      </div>
+
+      <div className="process-grid">
+        {process.map(([number, title, text]) => (
+          <article key={number} data-reveal>
+            <span>{number}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Benefits() {
+  const benefits = [
+    'Menos tareas repetitivas y más foco en lo importante.',
+    'Información ordenada para tomar decisiones con claridad.',
+    'Procesos conectados en una sola experiencia.',
+    'Acompañamiento hasta que la solución esté lista para operar.',
+  ];
+
+  return (
+    <section className="section full-bleed benefits-section">
+      <div data-reveal>
+        <span className="tag green">RESULTADOS</span>
+        <h2>Clásico en lo visual. Innovador en la forma de resolver.</h2>
+        <p>La tecnología debe sentirse simple para quien la usa y poderosa para quien toma decisiones.</p>
+      </div>
+
+      <div className="benefit-list" data-reveal>
+        {benefits.map(item => (
+          <article key={item}>
+            <CheckCircle2 size={19} />
+            <span>{item}</span>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  return (
+    <section id="contacto" className="cta full-bleed" data-reveal>
+      <div>
+        <span className="tag green">HABLEMOS DE TU PROYECTO</span>
+        <h2>Cuéntanos qué quieres mejorar y lo convertimos en producto digital.</h2>
+        <p>Conversemos sobre tu operación, tus usuarios y la solución que puede ayudarte a trabajar mejor.</p>
+
+        <div className="cta-actions">
+          <a className="btn btn-dark" href={WA} target="_blank" rel="noreferrer">
+            Escribir por WhatsApp <ArrowRight size={16} />
+          </a>
+        </div>
+      </div>
+
+      <img src={person4} alt="Ilustración EvolCorp" />
+    </section>
+  );
+}
+
+function WhatsAppFloat() {
+  return (
+    <a
+      className="whatsapp-float"
+      href={WA}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Escribir por WhatsApp"
+    >
+      <MessageCircle size={24} />
+    </a>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="full-bleed">
+      <img src={logoDark} alt="EvolCorp" />
+      <p>Innovación en movimiento · Software a la medida</p>
+      <a href={WA} target="_blank" rel="noreferrer">
+        WhatsApp
+      </a>
+    </footer>
+  );
+}
+
+function App() {
+  useReveal();
+
+  return (
+    <>
+      <Header />
+
+      <main>
+        <Hero />
+        <OverviewCards />
+        <Metrics />
+        <Services />
+        <Portfolio />
+        <CaseStudies />
+        <Process />
+        <Benefits />
+        <Contact />
+      </main>
+
+      <Footer />
+      <WhatsAppFloat />
+    </>
+  );
+}
+
+createRoot(document.getElementById('root')).render(<App />);
