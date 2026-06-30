@@ -45,8 +45,11 @@ import nogalLogo from './assets/clientes/nogal.png';
 import parqueLogo from './assets/clientes/Parque.png';
 import vancouverLogo from './assets/clientes/vancouver.png';
 
-const WA =
-  'https://wa.me/573232220691?text=Hola%20EvolCorp,%20quiero%20hablar%20sobre%20un%20proyecto%20digital';
+const WA_MESSAGE = `Hola, equipo EvolCorp
+Estuve viendo su página y me llamó la atención cómo transforman procesos en herramientas digitales útiles.
+Tengo un reto en mi negocio que quiero organizar, automatizar o mejorar. Me gustaría contarles un poco y saber qué solución podrían proponerme.`;
+
+const WA = `https://wa.me/573232220691?text=${encodeURIComponent(WA_MESSAGE)}`;
 
 function useReveal() {
   useEffect(() => {
@@ -1087,9 +1090,64 @@ function WhatsAppFloat() {
 
 function Footer() {
   return (
-    <footer className="full-bleed">
-      <img src={logoDark} alt="EvolCorp" />
-      
+    <footer className="site-footer">
+      <div className="full-bleed footer-wrap">
+       
+
+        <div className="footer-main" data-reveal>
+          <div className="footer-brand-block">
+            <a
+              className="footer-logo"
+              href="#inicio"
+              aria-label="Volver al inicio de EvolCorp"
+            >
+              <img src={logoDark} alt="EvolCorp" />
+            </a>
+
+            <p>
+              Software a la medida para ordenar procesos, conectar equipos y
+              convertir operaciones reales en productos digitales útiles.
+            </p>
+
+            
+          </div>
+
+          <div className="footer-link-group">
+            <span>EXPLORA</span>
+
+            <a href="#servicios">Servicios</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#casos">Casos destacados</a>
+            <a href="#proceso">Nuestro proceso</a>
+          </div>
+
+          <div className="footer-link-group footer-contact-links">
+            <span>HABLEMOS</span>
+
+            <a href="#contacto">Cuéntanos tu idea</a>
+
+            <a href={WA} target="_blank" rel="noreferrer">
+              <FaWhatsapp size={17} />
+              WhatsApp
+            </a>
+
+            <a href={WA} target="_blank" rel="noreferrer">
+              Cotizar un proyecto
+              <ArrowRight size={15} />
+            </a>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <p>
+            © {new Date().getFullYear()} EvolCorp. Software a la medida.
+          </p>
+
+          <a href="#inicio">
+            Volver arriba <span>↑</span>
+          </a>
+        </div>
+      </div>
     </footer>
   );
 }
