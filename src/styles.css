@@ -2192,3 +2192,130 @@ footer a {
     gap: 12px;
   }
 }
+/* =========================================================
+   TIPOGRAFÍA GLOBAL UNIFICADA · ESTILO TARJETAS DE SERVICIOS
+   ========================================================= */
+
+:root {
+  --font-evolcorp: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+html,
+body,
+button,
+a,
+input,
+textarea,
+select {
+  font-family: var(--font-evolcorp);
+}
+
+body {
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Títulos principales */
+h1,
+h2,
+h3,
+.section-head h2,
+.benefits-section h2,
+.cta h2,
+.footer-cta h2 {
+  font-family: var(--font-evolcorp);
+  color: var(--deep);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+}
+
+/* El hero conserva presencia, pero sin verse tan comprimido */
+h1 {
+  font-weight: 600;
+  letter-spacing: -0.052em;
+  line-height: 0.99;
+}
+
+/* Títulos medianos, como los de las tarjetas */
+h3,
+.service-card h3,
+.case-card h3,
+.portfolio-detail h3,
+.process-grid h3,
+.overview-card h2 {
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.13;
+}
+
+/* Textos descriptivos */
+p,
+.hero-left > p,
+.section-head p,
+.service-card p,
+.case-card p,
+.portfolio-summary,
+.portfolio-detail-row p,
+.build-card p,
+.cta p,
+.footer-brand-block p,
+.footer-cta p {
+  font-family: var(--font-evolcorp);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+
+/* Navegación, botones y enlaces */
+.site-header nav a,
+.btn,
+.mobile-menu a:not(.btn),
+.footer-link-group a,
+.footer-bottom a {
+  font-family: var(--font-evolcorp);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+/* Botones: menos pesados y más elegantes */
+.btn {
+  font-weight: 600;
+}
+
+/* Tags pequeños */
+.tag,
+.eyebrow,
+.footer-link-group > span,
+.footer-status,
+.portfolio-detail-row b,
+.case-card b {
+  font-family: var(--font-evolcorp);
+  font-weight: 700;
+  letter-spacing: 0.11em;
+}
+
+/* Listas y textos internos */
+.overview-card li,
+.metrics span,
+.metrics strong,
+.benefit-list article,
+.process-grid p {
+  font-family: var(--font-evolcorp);
+}
+
+.overview-card li,
+.benefit-list article {
+  font-weight: 500;
+  letter-spacing: -0.012em;
+}
+
+.metrics strong {
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.metrics span {
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
